@@ -1,4 +1,5 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi'
+import { createId } from '@paralleldrive/cuid2'
 import { HTTPException } from 'hono/http-exception'
 import { httpError, serverError, zodError } from '../lib/errorUtils'
 import {
@@ -10,15 +11,14 @@ import {
   updateBookResponseDto,
 } from './dto'
 import {
+  type CreateBookInput,
   createBook,
   findAllBooks,
   findBookById,
-  type CreateBookInput,
   removeBook,
   type UpdateBookInput,
   updateBook,
 } from './repository'
-import { createId } from "@paralleldrive/cuid2"
 
 const getListRoute = createRoute({
   method: 'get',
@@ -141,10 +141,12 @@ const deleteRoute = createRoute({
 const books = new OpenAPIHono()
   .openapi(getListRoute, async (c) => {
     const books = await findAllBooks()
-    return c.json(books.map((book) => ({
-      ...book,
-      genres: book.genresOnBooks,
-    })))
+    return c.json(
+      books.map((book) => ({
+        ...book,
+        genres: book.genresOnBooks,
+      })),
+    )
   })
 
   .openapi(postRoute, async (c) => {

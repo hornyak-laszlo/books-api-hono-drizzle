@@ -1,8 +1,14 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi'
+import { createId } from '@paralleldrive/cuid2'
 import { HTTPException } from 'hono/http-exception'
 import { httpError, serverError, zodError } from '../lib/errorUtils'
 import { createReviewRequestDto, createReviewResponseDto } from './dto'
-import { createReview, findReviewById, removeReview } from './repository'
+import {
+  type CreateReviewInput,
+  createReview,
+  findReviewById,
+  removeReview,
+} from './repository'
 
 const postRoute = createRoute({
   method: 'post',
@@ -56,8 +62,9 @@ const deleteRoute = createRoute({
 const reviews = new OpenAPIHono()
   .openapi(postRoute, async (c) => {
     const body = c.req.valid('json')
-    const data: ReviewCreateInput = {
-      book: { connect: { id: body.bookId } },
+    const data: CreateReviewInput = {
+      id: createId(),
+      bookId: body.bookId,
       rating: body.rating,
       text: body.text,
     }

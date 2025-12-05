@@ -12,7 +12,9 @@ export const review = pgTable('Review', {
   id: text().primaryKey().notNull(),
   createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
-  bookId: text().notNull().references(() => book.id, { onDelete: 'cascade' }),
+  bookId: text()
+    .notNull()
+    .references(() => book.id, { onDelete: 'cascade' }),
   rating: integer().notNull(),
   text: text().notNull(),
 })
@@ -35,8 +37,12 @@ export const genre = pgTable('Genre', {
 })
 
 export const genresOnBooks = pgTable('GenresOnBooks', {
-  bookId: text().notNull().references(() => book.id, { onDelete: 'cascade' }),
-  genreId: text().notNull().references(() => genre.id, { onDelete: 'restrict' }),
+  bookId: text()
+    .notNull()
+    .references(() => book.id, { onDelete: 'cascade' }),
+  genreId: text()
+    .notNull()
+    .references(() => genre.id, { onDelete: 'restrict' }),
 })
 
 export const reviewRelations = relations(review, ({ one }) => ({

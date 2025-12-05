@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi'
-import { serverError } from '../lib/errorUtils'
 import { db } from '../lib/db'
+import { serverError } from '../lib/errorUtils'
 
 const postRoute = createRoute({
   method: 'post',

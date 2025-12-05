@@ -66,9 +66,7 @@
         "Book_isbn_unique": {
           "name": "Book_isbn_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "isbn"
-          ]
+          "columns": ["isbn"]
         }
       },
       "policies": {},
@@ -106,9 +104,7 @@
         "Genre_name_unique": {
           "name": "Genre_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         }
       },
       "policies": {},
@@ -138,12 +134,8 @@
           "name": "GenresOnBooks_bookId_Book_id_fk",
           "tableFrom": "GenresOnBooks",
           "tableTo": "Book",
-          "columnsFrom": [
-            "bookId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bookId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -151,12 +143,8 @@
           "name": "GenresOnBooks_genreId_Genre_id_fk",
           "tableFrom": "GenresOnBooks",
           "tableTo": "Genre",
-          "columnsFrom": [
-            "genreId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["genreId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "no action"
         }
@@ -216,12 +204,8 @@
           "name": "Review_bookId_Book_id_fk",
           "tableFrom": "Review",
           "tableTo": "Book",
-          "columnsFrom": [
-            "bookId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bookId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }

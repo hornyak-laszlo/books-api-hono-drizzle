@@ -1,7 +1,8 @@
 import { neon } from '@neondatabase/serverless'
 import { config } from 'dotenv'
 import { drizzle } from 'drizzle-orm/neon-http'
-import * as schema from "./schema";
+import * as schema from './schema'
+
 config({ path: '.env' }) // or .env.local
 
 // biome-ignore lint/style/noNonNullAssertion: <env will never be null>

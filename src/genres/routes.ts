@@ -1,4 +1,5 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi'
+import { createId } from '@paralleldrive/cuid2'
 import { HTTPException } from 'hono/http-exception'
 import { httpError, serverError, zodError } from '../lib/errorUtils'
 import {
@@ -7,6 +8,7 @@ import {
   listGenresResponseDto,
 } from './dto'
 import {
+  type CreateGenreInput,
   createGenre,
   findAllGenres,
   findGenreById,
@@ -86,12 +88,13 @@ const genres = new OpenAPIHono()
 
   .openapi(postRoute, async (c) => {
     const body = c.req.valid('json')
-    const data: GenreCreateInput = {
+    const data: CreateGenreInput = {
+      id: createId(),
       name: body.name,
     }
-    const book = await createGenre(data)
+    const genre = await createGenre(data)
 
-    return c.json(book)
+    return c.json(genre)
   })
 
   .openapi(deleteRoute, async (c) => {
